@@ -1,0 +1,39 @@
+@import './normalize.css';
+:root {
+  /* 根元素定义CSS变量 */
+  --color-text:rgb(49, 48, 48);
+  --color-high-text:#fd2828;/*文字高亮*/
+  --color-tint:#f78499;/*背景*/
+  --background:rgb(240, 239, 245);
+  --font-size:14px;
+  --line-hight:1.5;
+}
+*,*::before,*::after {
+  /*伪元素选择器*/
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+body {
+  font-family:"Helvetica Neue",Helvetica,"PingFang SC","Hiragino Sans GB","Microsoft YaHei","微软雅黑",Arial,sans-serif;
+  user-select: none;/*禁止用户鼠标在页面上选中文字图片*/
+  -webkit-tap-highlight-color: transparent;
+  background:var(--color-background);
+  color:var(--color-text);
+  width:100vw;/*窗口宽度100%响应式*/
+}
+a {
+  color:var(--color-text);
+  /*text-decoration这个属性是设置文本的修饰线外观（下划线、上划线、贯穿线/删除线 或闪烁）*/
+  text-decoration: none;
+}
+.clear-fix {
+  zoom:1;
+  /*/*IE6/7不支持:after伪类，zoom:1让IE6/7的元素可以清除浮动来包裹内部元素。*/
+}
+.left {
+  float: left;
+}
+.right {
+  float: right;
+}

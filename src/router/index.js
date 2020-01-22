@@ -5,13 +5,30 @@ Vue.use(VueRouter)
 
 const routes = [
   {
-    path: '/',
-    name: 'home',
+    path:'',
+    redirect:'/home'
+  },
+  {
+    path: '/home',
+    component:()=>import('@/views/home/Home')
+  },
+  {
+    path: '/menu',
+    component:()=>import('@/views/menu/Menu')
+  },
+  {
+    path: '/cart',
+    component:()=>import('@/views/cart/Cart')
+  },
+  {
+    path: '/my',
+    component:()=>import('@/views/my/My')
   }
 ]
 
 const router = new VueRouter({
-  routes
+  routes,
+  mode: 'history'
 })
 
 export default router
