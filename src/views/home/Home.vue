@@ -5,15 +5,16 @@
       <div slot='center'>商品首页</div>
       <img class='right' slot='right' src="@/assets/img/navbar/scan.svg">
     </NavBar>
+    <HomeSwiper :banners='banners'></HomeSwiper>
   </div>
 </template>
-
 <script>
 import NavBar from "@/components/common/navbar/NavBar"
+import HomeSwiper from "./children/HomeSwiper"
 import {getHomeData} from '@/network/home.js'
 export default {
   components:{
-    NavBar
+    NavBar,HomeSwiper
   },
   created() {
     //创建组件之后请求多类数据并且保存
@@ -30,7 +31,6 @@ export default {
   },
 }
 </script>
-
 <style scoped>
   .home-nav {
     background-color: rgb(109, 42, 187);
