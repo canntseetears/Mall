@@ -5,11 +5,12 @@
       <div slot="center">商品首页</div>
       <img class="right" slot="right" src="@/assets/img/navbar/scan.svg" />
     </NavBar>
+    <TabControl v-show='showTabControl' class="tab-scroll" @tabClick="tabClick" ref='tabC1' />
     <Scroll class="content" ref="scroll" :probe-type="3" @scroll="scroll">
       <HomeCarousel :banners="banners"></HomeCarousel>
       <HomeRecommend :recommends="recommends"></HomeRecommend>
       <Rank></Rank>
-      <TabControl class="tab-scroll" @tabClick="tabClick"></TabControl>
+      <TabControl @tabClick="tabClick" ref='tabC'></TabControl>
       <GoodsList :goods="goods[currentTab]"></GoodsList>
     </Scroll>
     <BackTop @click.native="backtop" v-show="isShow"></BackTop>
@@ -37,7 +38,7 @@ export default {
     TabControl,
     GoodsList,
     Scroll,
-    BackTop
+    BackTop,
   },
   created() {
     //创建组件之后请求多类数据并且保存，注意此时还没有DOM
@@ -46,7 +47,10 @@ export default {
   },
   mounted() {
     this.$bus.$on("imgL", () => {
-      this.$refs.scroll.refresh();
+      //防抖动,不会很快执行
+      this.debounce(this.$refs.scroll.refresh,1000)
+      //获取tabcontroloffset,但是图片未加载完毕需要监听图片加载完毕
+      this.tabControlOff=this.$refs.tabC.$el.offsetTop
     });
   },
   methods: {
@@ -68,14 +72,29 @@ export default {
           this.currentTab = "sell";
           break;
       }
+      //保持真假一致
+      this.$refs.tabC1.currentIndex=i
+      this.$refs.tabC.currentIndex=i
     },
     backtop() {
       //SCROLL组件的封装方法
       this.$refs.scroll.scrollTo(0, 0);
     },
     scroll(p) {
-      //拿到SCROLL组件的position
+      //拿到SCROLL组件的position判断置顶是否显示
       this.isShow = -p.y > 800;
+      //判断tabcontrol是否吸顶
+      this.showTabControl=(-p.y)>450
+    },
+    debounce(func,delay){
+      //防抖函数
+      let timer=null;
+      return (...args)=>{
+        if(timer) clearTimeout(timer)
+        timer =setTimeout(() => {
+          func.apply(this,args)
+        },delay)
+      }
     }
     /* getHomeGoods(type){
       axios({
@@ -551,6 +570,8 @@ export default {
         ]
       },
       isShow: false,
+      showTabControl:false,
+      tabControlOff:0,
       currentTab: "pop" //存放点击的TAB
     };
   }
@@ -564,20 +585,20 @@ export default {
 .home-nav {
   background-color: rgb(109, 42, 187);
   color: rgb(245, 245, 245);
+  /* 原生滚动需要加下列属性
   font-size: 16px;
   position: fixed;
-  width: 100%;
+  width: 100%; */
 }
 .left,
 .right {
   height: 26px;
   margin-top: 8px;
 }
-/* .tab-scroll {
-  position: sticky;
-  top: 44px;
+.tab-scroll {
+  position: relative;
   z-index: 9;
-} */
+}
 .content {
   overflow: hidden;
   position: absolute;
