@@ -1,7 +1,9 @@
 <template>
   <div class='item'>
     <div>
-      <img :src="product.img" />
+      <a href="https://cn.vuejs.org/v2/style-guide">
+        <img :src="product.img" @load='imgLoad'>
+      </a>
       <div class='text'>
         <p>{{product.title}}</p>
         <span class='price'>{{product.price}}</span>
@@ -16,8 +18,13 @@ export default {
     product: {
       type: Object,
       default() {
-        return {};
+        return {}
       }
+    }
+  },
+  methods: {
+    imgLoad(){
+      this.$bus.$emit('imgL')
     }
   }
 };

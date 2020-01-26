@@ -1,12 +1,13 @@
 <template>
   <div class='tabcontrol'>
     <div v-for='(item,i) in titles' :key="i" class='tabc-item'>
-      <span :class='{active:currentIndex===i}' @click='changeI(i)'>{{item}}</span>
+      <span  :class='{ active:currentIndex === i}' @click='changeI(i)'>{{item}}</span>
     </div>
   </div>  
 </template>
 <script>
 export default {
+  name:'TabControl',
   props:{
     titles:{
       type: Array,
@@ -32,12 +33,17 @@ export default {
 <style scoped>
 .tabcontrol {
   display: flex;
-  justify-content:space-around;
-}
-.tabc-item {
+  /* justify-content:space-around; */
   height: 40px;
   line-height: 40px;
+  background-color:rgba(238, 225, 225);
+  text-align: center;
 }
+.tabc-item {
+  flex: auto;
+  /* height: 40px;
+  line-height: 40px; */
+} 
 .active {
   color:rgb(202, 31, 145);
   border-bottom: 2px solid rgb(202, 31, 145);

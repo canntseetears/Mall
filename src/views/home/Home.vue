@@ -5,23 +5,29 @@
       <div slot="center">商品首页</div>
       <img class="right" slot="right" src="@/assets/img/navbar/scan.svg" />
     </NavBar>
-    <HomeCarousel :banners="banners"></HomeCarousel>
-    <HomeRecommend :recommends="recommends"></HomeRecommend>
-    <Rank></Rank>
-    <TabControl class="tab-scroll" @tabClick='tabClick'></TabControl>
-    <GoodsList :goods="goods[currentTab]"></GoodsList>
-    <br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
+    <Scroll class="content" ref="scroll" :probe-type="3" @scroll="scroll">
+      <HomeCarousel :banners="banners"></HomeCarousel>
+      <HomeRecommend :recommends="recommends"></HomeRecommend>
+      <Rank></Rank>
+      <TabControl class="tab-scroll" @tabClick="tabClick"></TabControl>
+      <GoodsList :goods="goods[currentTab]"></GoodsList>
+    </Scroll>
+    <BackTop @click.native="backtop" v-show="isShow"></BackTop>
   </div>
 </template>
 <script>
 import NavBar from "@/components/common/navbar/NavBar";
+
+import Scroll from "@/components/common/scroll/Scroll";
 import HomeCarousel from "./children/HomeCarousel";
 import HomeRecommend from "./children/HomeRecommend";
 import Rank from "./children/Rank";
 import TabControl from "@/components/content/TabControl";
 import GoodsList from "@/components/content/goods/GoodsList";
 
-import { getHomeData } from "@/network/home.js";
+import BackTop from "@/components/content/backtop/BackTop";
+
+import { getHomeData } from "@/network/home.js"; //封装起来，耦合度低易维护
 export default {
   components: {
     NavBar,
@@ -29,12 +35,19 @@ export default {
     HomeRecommend,
     Rank,
     TabControl,
-    GoodsList
+    GoodsList,
+    Scroll,
+    BackTop
   },
   created() {
-    //创建组件之后请求多类数据并且保存
+    //创建组件之后请求多类数据并且保存，注意此时还没有DOM
     this.getHomeData(); //加this是因为与methods同名，否则会调用home.js导入的方法
     //this.getHomeGoods("pop");
+  },
+  mounted() {
+    this.$bus.$on("imgL", () => {
+      this.$refs.scroll.refresh();
+    });
   },
   methods: {
     getHomeData() {
@@ -43,18 +56,26 @@ export default {
         this.recommends = res.data.data.recommend.list;
       });
     },
-    tabClick(i){
+    tabClick(i) {
       switch (i) {
         case 0:
-          this.currentTab='pop'
+          this.currentTab = "pop";
           break;
         case 1:
-          this.currentTab='new'
+          this.currentTab = "new";
           break;
         case 2:
-          this.currentTab='sell'
+          this.currentTab = "sell";
           break;
       }
+    },
+    backtop() {
+      //SCROLL组件的封装方法
+      this.$refs.scroll.scrollTo(0, 0);
+    },
+    scroll(p) {
+      //拿到SCROLL组件的position
+      this.isShow = -p.y > 800;
     }
     /* getHomeGoods(type){
       axios({
@@ -66,14 +87,14 @@ export default {
         console.log(res);
       })
     } */
-    // getHomeGoods(type) {
-    //   const p = this.goods[type].page + 1;
-    //   getHomeGoods(type, p).then(res => {
-        //console.log('接口过期');
-        //this.goods[type].list.push(...res.data.list)
-        //this.goods[type].page+=1
-      //});
-    //}
+    /* getHomeGoods(type) {
+      const p = this.goods[type].page + 1;
+      getHomeGoods(type, p).then(res => {
+      console.log('接口过期');
+      this.goods[type].list.push(...res.data.list)
+      this.goods[type].page+=1
+      });
+    } */
   },
   data() {
     return {
@@ -529,34 +550,45 @@ export default {
           }
         ]
       },
-      currentTab:'pop'//存放点击的TAB
+      isShow: false,
+      currentTab: "pop" //存放点击的TAB
     };
   }
 };
 </script>
 <style scoped>
+#home {
+  height: 100vh;
+  position: relative;
+}
 .home-nav {
   background-color: rgb(109, 42, 187);
   color: rgb(245, 245, 245);
   font-size: 16px;
-  display: flex;
-  align-items: center;
+  position: fixed;
+  width: 100%;
 }
 .left,
 .right {
   height: 26px;
+  margin-top: 8px;
 }
-.left {
-  margin-left: 10px;
-}
-.right {
-  margin-right: 10px;
-}
-.tab-scroll {
+/* .tab-scroll {
   position: sticky;
-  top: 0px;
+  top: 44px;
   z-index: 9;
-  background-color:rgba(238, 225, 225, 0.945);
-  /* 滚动固定在顶部 */
+} */
+.content {
+  overflow: hidden;
+  position: absolute;
+  top: 44px;
+  bottom: 49px;
+  left: 0;
+  right: 0;
 }
+/* .content {
+  height: calc(100%-93px);
+  overflow: hidden;
+  margin-top:44px;
+} */
 </style>
