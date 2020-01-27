@@ -1,9 +1,9 @@
 <template>
-  <div class='item'>
+  <div class='item' @click='toDetail'>
     <div>
-      <a href="https://cn.vuejs.org/v2/style-guide">
+      <!-- <a href="">
+      </a> -->
         <img :src="product.img" @load='imgLoad'>
-      </a>
       <div class='text'>
         <p>{{product.title}}</p>
         <span class='price'>{{product.price}}</span>
@@ -25,6 +25,9 @@ export default {
   methods: {
     imgLoad(){
       this.$bus.$emit('imgL')
+    },
+    toDetail(){
+      this.$router.push('/detail/'+this.product.id)
     }
   }
 };

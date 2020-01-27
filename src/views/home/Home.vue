@@ -17,6 +17,7 @@
   </div>
 </template>
 <script>
+//keep-alive使首页不被销毁；再保持原来状态(离开保存一个位置信息，进入再加载位置)activated,deactivated
 import NavBar from "@/components/common/navbar/NavBar";
 
 import Scroll from "@/components/common/scroll/Scroll";
@@ -46,12 +47,21 @@ export default {
     //this.getHomeGoods("pop");
   },
   mounted() {
+    //事件总线，在goodsitem中发送
+    const refresh = this.debounce(this.$refs.scroll.refresh, 1100)
     this.$bus.$on("imgL", () => {
       //防抖动,不会很快执行
-      this.debounce(this.$refs.scroll.refresh,1000)
+      refresh()
       //获取tabcontroloffset,但是图片未加载完毕需要监听图片加载完毕
-      this.tabControlOff=this.$refs.tabC.$el.offsetTop
+      //this.tabControlOff=this.$refs.tabC.$el.offsetTop
     });
+  },
+  activated(){
+    this.$refs.scroll.scrollTo(0,this.saveY,0)
+    this.$refs.scroll.refresh()
+  },
+  deactivated() {
+    this.saveY=this.$refs.scroll.scroll.y
   },
   methods: {
     getHomeData() {
@@ -126,7 +136,8 @@ export default {
             img:
               "https://s5.mogucdn.com/mlcdn/c45406/191030_7dg0bc6e206d1c24555l8aj39i31h_4999x5999.jpg_640x854.v1cAC.40.webp",
             price: "¥88",
-            collect: "3"
+            collect: "3",
+            id:6868
           },
           {
             title: "2019新款韩版秋冬时尚短款毛衣百搭纯色灯笼袖洋气毛针织衫女",
@@ -572,6 +583,7 @@ export default {
       isShow: false,
       showTabControl:false,
       tabControlOff:0,
+      saveY: 0,
       currentTab: "pop" //存放点击的TAB
     };
   }

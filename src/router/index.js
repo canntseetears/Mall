@@ -23,6 +23,10 @@ const routes = [
   {
     path: '/my',
     component:()=>import('@/views/my/My')
+  },
+  {
+    path: '/detail/:id',
+    component:()=>import('@/views/detail/Detail')
   }
 ]
 

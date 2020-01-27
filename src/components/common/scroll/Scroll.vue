@@ -34,7 +34,7 @@ export default {
   methods:{
     scrollTo(x,y,time=450){
       //time=500默认给time赋值
-      this.scroll && this.scroll.scrollTo &&this.scroll.scrollTo(x,y,time)
+      this.scroll &&this.scroll.scrollTo(x,y,time)
       //可能出现HOME中调用但是scroll还未创建即为null状态
     },
     refresh(){

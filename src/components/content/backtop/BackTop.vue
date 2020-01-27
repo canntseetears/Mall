@@ -1,6 +1,6 @@
 <template>
   <div class='bt'>
-    <img src="@/assets/img/common/back-top.png" alt="置顶">
+    <img src="@/assets/img/common/up_top.png" alt="置顶">
   </div>
 </template>
 <script>
