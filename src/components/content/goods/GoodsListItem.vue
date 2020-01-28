@@ -1,8 +1,6 @@
 <template>
   <div class='item' @click='toDetail'>
     <div>
-      <!-- <a href="">
-      </a> -->
         <img :src="product.img" @load='imgLoad'>
       <div class='text'>
         <p>{{product.title}}</p>

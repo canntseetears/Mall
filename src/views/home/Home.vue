@@ -144,21 +144,24 @@ export default {
             img:
               "https://s5.mogucdn.com/mlcdn/55cf19/191126_5606lli03baclk16f5j0gd3jid4bh_640x960.jpg_640x854.v1cAC.40.webp",
             price: "¥36.4",
-            collect: "44"
+            collect: "44",
+            id:6868
           },
           {
             title: "气质交叉V领修身针织衫女韩版秋冬季时尚亮丝长袖打底上衣潮",
             img:
               "https://s5.mogucdn.com/mlcdn/c45406/191117_87bd1idd0ce01g6adje9d39efcieg_3999x5999.jpg_640x854.v1cAC.40.webp",
             price: "¥46.2",
-            collect: "0"
+            collect: "0",
+            id:6868
           },
           {
             title: "美特斯邦威复古条纹毛衣女宽松韩版春新品打底毛衫百搭潮流",
             img:
               "https://s5.mogucdn.com/mlcdn/55cf19/180227_691ehhhci36le6i33526hh7i7cbkk_1000x1000.jpg_640x854.v1cAC.40.webp",
             price: "¥55",
-            collect: "28"
+            collect: "28",
+            id:6868
           },
           {
             title:
@@ -226,7 +229,8 @@ export default {
             img:
               "https://s5.mogucdn.com/mlcdn/c45406/170907_7igjcccg0fgl15b931l81ehe61468_640x900.jpg_640x854.v1cAC.40.webp",
             price: "¥79.1",
-            collect: "1859"
+            collect: "1859",
+            id:6868
           },
           {
             title: "新款牛仔裤男直筒宽松坠感阔腿潮牌韩版潮流九分裤子老爹ins裤",

@@ -1,6 +1,6 @@
 <template>
-  <div id="detail">
-    <NavBar>
+  <div>
+    <NavBar class='detail-nav'>
       <div slot='left' class='back' @click='back'>
         <img src="@/assets/img/common/back.png">
       </div>
@@ -15,7 +15,6 @@
 </template>
 <script>
 import NavBar from "@/components/common/navbar/NavBar";
-
 export default {
   name:'DetailNav',
   components: {
@@ -23,7 +22,7 @@ export default {
   },
   data() {
     return {
-      titles:['商品','参数','评论','推荐'],
+      titles:['商品','参数','推荐'],
       currentIndex:0
     }
   },
@@ -38,16 +37,22 @@ export default {
 }
 </script>
 <style scoped>
+.detail-nav {
+  position: relative;
+  z-index: 9;
+  background-color: #fff;
+}
 .titles {
   display: flex;
   justify-content:space-around;
-  font-size: 17px;
+  font-size: 18px;
 }
 .active {
   color: rgb(179, 24, 179);
 }
 .back img {
-  height: 18px;
+  height: 16px;
+  margin-top:14px;
 }
 .more img {
   margin-top: 4px;
