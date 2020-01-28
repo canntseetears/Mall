@@ -7,6 +7,7 @@
       <DetailParam ref='param'/>
       <DetailRecom ref='recom'/>
     </Scroll>
+    <DetailBar/>
   </div>  
 </template>
 <script>
@@ -21,12 +22,13 @@ import DetailMain from './child/DetailMain';
 import DetailParam from './child/DetailParam'
 import DetailRecom from './child/DetailRecom';
 import Scroll from "@/components/common/scroll/Scroll";
+import DetailBar from './child/DetailBar'
 import {debounce} from '@/common/utils.js';
 
 export default {
   name:'Detail',
   components: {
-    DetailNav,DetailCarou,DetailMain,Scroll,DetailParam,DetailRecom
+    DetailNav,DetailCarou,DetailMain,Scroll,DetailParam,DetailRecom,DetailBar
   },
   created(){
     //拿到商品ID
@@ -38,6 +40,8 @@ export default {
     this.topYs.push(0)
     this.topYs.push(this.$refs.param.$el.offsetTop)
     this.topYs.push(this.$refs.recom.$el.offsetTop)
+    //最大的值与推荐之间
+    this.topYs.push(Number.MAX_SAFE_INTEGER);
     },100)()
   },
   data() {
@@ -68,12 +72,17 @@ export default {
     contentS(p) {
       const y=-p.y
       const length= this.topYs.length
-      for (let i=0;i<this.topYs.length;i++) {
+      /* for (let i=0;i<this.topYs.length;i++) {
         if(this.currentIndex !==i &&((i<length-1 && y>=this.topYs[i] && y<= this.topYs[i+1]) || (i===length-1 && y>this.topYs[i])))
         this.currentIndex=i
         this.$refs.dnav.currentIndex=this.currentIndex
+      } */
+      for (let i=0;i<this.topYs.length;i++) {
+        if(this.currentIndex !==i && (y>=this.topYs[i] && y<= this.topYs[i+1]) )
+        this.currentIndex=i
+        this.$refs.dnav.currentIndex=this.currentIndex
+        //最大值
       }
-
     }
   }
 }
@@ -87,6 +96,6 @@ export default {
 }
 .content {
   background-color: #fff;
-  height: calc( 100% - 44px );
+  height: calc( 100% - 44px-49px );
 }
 </style>
