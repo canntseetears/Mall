@@ -7,7 +7,7 @@
       <DetailParam ref='param'/>
       <DetailRecom ref='recom'/>
     </Scroll>
-    <DetailBar/>
+    <DetailBar @addCart='addCart'/>
   </div>  
 </template>
 <script>
@@ -83,6 +83,14 @@ export default {
         this.$refs.dnav.currentIndex=this.currentIndex
         //最大值
       }
+    },
+    addCart(){
+      const pro={}
+      pro.img=this.product.carou[0]
+      pro.title='绑带长袖针织连衣裙'
+      pro.description='绑带长袖针织连衣裙网红小香风单边斜肩个性小黑裙性感开叉裙子潮'
+      pro.price='￥178'
+      pro.id=this.id
     }
   }
 }
