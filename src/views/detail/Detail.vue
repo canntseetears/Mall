@@ -1,9 +1,11 @@
 <template>
   <div id="detail">
-    <DetailNav />
-    <Scroll class='content'>
+    <DetailNav @titleClick='detailNav' ref="dnav"/>
+    <Scroll class='content' ref='scroll' @scroll='contentS' :probeType='3'>
       <DetailCarou :pro='product'/>
       <DetailMain :pro='product'/>
+      <DetailParam ref='param'/>
+      <DetailRecom ref='recom'/>
     </Scroll>
   </div>  
 </template>
@@ -16,20 +18,34 @@
 import DetailNav from "./child/DetailNav";
 import DetailCarou from './child/DetailCarou';
 import DetailMain from './child/DetailMain';
+import DetailParam from './child/DetailParam'
+import DetailRecom from './child/DetailRecom';
 import Scroll from "@/components/common/scroll/Scroll";
+import {debounce} from '@/common/utils.js';
 
 export default {
   name:'Detail',
   components: {
-    DetailNav,DetailCarou,DetailMain,Scroll
+    DetailNav,DetailCarou,DetailMain,Scroll,DetailParam,DetailRecom
   },
   created(){
     //拿到商品ID
     this.id=this.$route.params.id
+    this.topYs=debounce(()=>{
+    //注意$refs拿到的是组件，加$el才是根组件
+    //必须图片等数据渲染完毕
+    this.topYs=[]
+    this.topYs.push(0)
+    this.topYs.push(this.$refs.param.$el.offsetTop)
+    this.topYs.push(this.$refs.recom.$el.offsetTop)
+    },100)()
   },
   data() {
     return {
       id:null,
+      //获取offsetTop
+      topYs:null,
+      currentIndex:0,
       product:{
         'carou':[
           'https://s5.mogucdn.com/mlcdn/c45406/191202_7jd0l28k24f6f9bd5lhd12kg42f83_640x960.jpg_640x960.v1cAC.70.webp',
@@ -45,6 +61,21 @@ export default {
       }
     }
   },
+  methods:{
+    detailNav(i){
+      this.$refs.scroll.scrollTo(0,-this.topYs[i],400)
+    },
+    contentS(p) {
+      const y=-p.y
+      const length= this.topYs.length
+      for (let i=0;i<this.topYs.length;i++) {
+        if(this.currentIndex !==i &&((i<length-1 && y>=this.topYs[i] && y<= this.topYs[i+1]) || (i===length-1 && y>this.topYs[i])))
+        this.currentIndex=i
+        this.$refs.dnav.currentIndex=this.currentIndex
+      }
+
+    }
+  }
 }
 </script>
 <style scoped>

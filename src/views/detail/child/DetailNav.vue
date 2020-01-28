@@ -29,6 +29,8 @@ export default {
   methods: {
     changeI(i){
       this.currentIndex=i
+      //点击标题滚动到对应位置
+      this.$emit('titleClick',i)
     },
     back(){
       this.$router.back()

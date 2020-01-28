@@ -59,50 +59,6 @@
         <img style="width:100%" :src="item" />
       </div>
     </div>
-    <div class="param">
-      <table width="100%">
-        <tr>
-          <th width="20%">尺码</th>
-          <th width="20%">裙长</th>
-          <th>肩宽</th>
-          <th>胸围</th>
-          <th>袖长</th>
-        </tr>
-        <tr>
-          <td>均码</td>
-          <td>95</td>
-          <td>37</td>
-          <td>66</td>
-          <td>58</td>
-        </tr>
-        <tr>
-          <td>颜色</td>
-          <td colspan="4">黑色</td>
-        </tr>
-        <tr>
-          <td>季节</td>
-          <td colspan="4">秋冬</td>
-        </tr>
-        <tr>
-          <td>材质</td>
-          <td colspan="4">针织</td>
-        </tr>
-        <tr>
-          <td>裙长</td>
-          <td colspan="4">中裙 (91-105cm)</td>
-        </tr>
-      </table>
-    </div>
-    <div>
-      <img style="width:100%" src="https://s11.mogucdn.com/mlcdn/c024f5/190417_2d51ljj2a42lddkg49ibag494g3ca_1125x540.png_468x468.webp">
-    </div>
-    <div class="recom">
-      <div class="recom-item" v-for="(item,i) in recommend" :key="i">
-        <img :src='item.ur' />
-        <p style="font-size:14px;">{{item.title}}</p>
-        <p>{{item.price}}</p>
-      </div>
-    </div>
   </div>
 </template>
 <script>
@@ -115,36 +71,6 @@ export default {
         return {};
       }
     }
-  },
-  data() {
-    return {
-      recommend: [
-        {
-          ur:
-            "https://s11.mogucdn.com/mlcdn/c45406/191109_837b5ad7ef49k2f1afha15h4ajilk_640x960.jpg",
-          title: "金丝绒连衣裙女装新款潮网红高冷御姐风成熟气质丝绒蕾丝裙子秋冬",
-          price: "￥119"
-        },
-        {
-          ur:
-            "https://s5.mogucdn.com/mlcdn/c45406/191215_461lb7175ke5kjiedj1f5jkag78h8_640x960.jpg",
-          title: "连衣裙遮肚子配大衣内搭大码胖mm减龄显瘦蕾丝小个子气质打底裙",
-          price: "￥119"
-        },
-        {
-          ur:
-            "https://s11.mogucdn.com/mlcdn/c45406/191227_0k0j98d93e70gbkk132l7hh41993j_640x960.jpg",
-          title: "网红气质国风旗袍连衣裙女秋冬新款加厚洋气拜年裙轻熟风内搭裙子",
-          price: "￥86"
-        },
-        {
-          ur:
-            "https://s11.mogucdn.com/mlcdn/c45406/191119_681b54ebd5f55ii80kha675j3g36c_640x960.jpg",
-          title: "新款韩版蕾丝裙子长袖蛋糕裙性感V领喇叭袖不规则多层裙摆连衣裙",
-          price: "￥74"
-        }
-      ]
-    };
   }
 };
 </script>
@@ -225,7 +151,7 @@ del {
   /* flex: auto; */
   width: 320px;
 }
-.param table {
+/* .param table {
   border-collapse: collapse;
   margin-top: 5px;
 }
@@ -239,8 +165,8 @@ del {
 }
 .param tr {
   border-bottom: 1px solid rgb(219, 212, 212);
-}
-.recom {
+} */
+/* .recom {
   display: flex;
   margin-top: 14px;
   width: 100%;
@@ -256,5 +182,5 @@ del {
   width: 100%;
 border-radius: 5px;  
 
-}
+} */ 
 </style>

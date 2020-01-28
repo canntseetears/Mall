@@ -28,7 +28,7 @@ export default {
       probeType:this.probeType,
       click:true//解决scroll内点击的监听问题
     })
-    //监听滚动位置
+    //监听滚动位置,发出了事件
     this.scroll.on('scroll',positon=>this.$emit('scroll',positon))
   },
   methods:{
