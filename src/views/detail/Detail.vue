@@ -91,6 +91,7 @@ export default {
       pro.description='绑带长袖针织连衣裙网红小香风单边斜肩个性小黑裙性感开叉裙子潮'
       pro.price='￥178'
       pro.id=this.id
+      this.$store.commit('addC',pro)
     }
   }
 }
@@ -104,6 +105,6 @@ export default {
 }
 .content {
   background-color: #fff;
-  height: calc( 100% - 44px-49px );
+  height: calc( 100% - 93px );
 }
 </style>

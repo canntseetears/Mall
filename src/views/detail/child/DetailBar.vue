@@ -20,7 +20,6 @@
     </div>
   </div>
 </template>
-
 <script>
 export default {
   name:'DetailBar',
@@ -31,7 +30,6 @@ export default {
   }
 }
 </script>
-
 <style scoped>
 /* .bottomBar {
   position:relative;
