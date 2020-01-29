@@ -7,6 +7,11 @@
       <DetailParam ref='param'/>
       <DetailRecom ref='recom'/>
     </Scroll>
+    <transition>
+      <div class='success' v-show='showC'>
+        <span>添加成功 ~</span>
+      </div>
+    </transition>
     <DetailBar @addCart='addCart'/>
   </div>  
 </template>
@@ -49,6 +54,7 @@ export default {
       id:null,
       //获取offsetTop
       topYs:null,
+      showC:false,
       currentIndex:0,
       product:{
         'carou':[
@@ -85,13 +91,18 @@ export default {
       }
     },
     addCart(){
+      this.showC=true
+      setTimeout(() => {
+        this.showC=false
+      },700)
       const pro={}
       pro.img=this.product.carou[0]
       pro.title='绑带长袖针织连衣裙'
       pro.description='绑带长袖针织连衣裙网红小香风单边斜肩个性小黑裙性感开叉裙子潮'
-      pro.price='￥178'
+      pro.price='178'
       pro.id=this.id
-      this.$store.commit('addC',pro)
+      //this.$store.commit('addC',pro)
+      this.$store.dispatch('addC',pro)
     }
   }
 }
@@ -106,5 +117,23 @@ export default {
 .content {
   background-color: #fff;
   height: calc( 100% - 93px );
+}
+.success {
+  height: 40px;
+  width: 140px;
+  padding:8px 28px;
+  background-color: rgba(40, 207, 54, 0.575);
+  bottom:50%;
+  left:34%;
+  position: fixed;
+  z-index: 99;
+  color:rgb(238, 227, 227);
+  border-radius:16px;
+}
+.v-enter-active,.v-leave-active {
+  transition:opacity 2s;
+}
+.v-enter,.v-leave-to{
+  opacity: 0;
 }
 </style>
