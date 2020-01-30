@@ -14,7 +14,14 @@ const routes = [
   },
   {
     path: '/menu',
-    component:()=>import('@/views/menu/Menu')
+    component:()=>import('@/views/menu/Menu'),
+    children:[
+      {
+        path:'sweater',
+        name:'sweater',
+        component:import('@/views/menu/child/Mcontentmain')
+      }
+    ]
   },
   {
     path: '/cart',

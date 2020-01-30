@@ -15,3 +15,5 @@ See [Configuration Reference](https://cli.vuejs.org/config/).
 + when use better-scroll if content boom should give its width 100vh
 + maybe need refresh when using scroll
 + want to know situation outside should use promise
++ polyfill 补丁
++ vue-lazyload图片懒加载插件
