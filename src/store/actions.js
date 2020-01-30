@@ -7,14 +7,20 @@ export default {
         oldPro=iterator
       }
     } */
-    let oldPro=context.state.cartList.find(item => item.id === payload.id)
-    if(oldPro){
-      //oldPro.count += 1
-      context.commit('addCounter',oldPro)
-    }else{
-      payload.count =1
-      //state.cartList.push(payload)
-      context.commit('addToCart',payload)
-    }
+    return new Promise((resolve,reject)=>{
+      //可以使用mapActions映射
+
+      let oldPro=context.state.cartList.find(item => item.id === payload.id)
+      if(oldPro){
+        //oldPro.count += 1
+        context.commit('addCounter',oldPro)
+        resolve("commodity's count +1")
+      }else{
+        payload.count =1
+        //state.cartList.push(payload)
+        context.commit('addToCart',payload)
+        resolve("new commodity add")
+      }
+    })
   }
 }

@@ -102,7 +102,7 @@ export default {
       pro.price='178'
       pro.id=this.id
       //this.$store.commit('addC',pro)
-      this.$store.dispatch('addC',pro)
+      this.$store.dispatch('addC',pro).then(res=>console.log(res))
     }
   }
 }

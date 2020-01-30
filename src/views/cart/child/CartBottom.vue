@@ -33,7 +33,7 @@ export default {
     },
     calcClick() {
       if (!this.isSelectAll) {
-        this.$toast.show("请选择要购买的商品");
+        this.$toast.showM("请选择要购买的商品",1500);
       }
     }
   },
@@ -49,10 +49,13 @@ export default {
       );
     },
     isSelectAll() {
-      return (
+      if(!this.cartL.length){
+        return false  
+      }else{
+        return !this.cartL.find(item=> !item.checked)
         //!this.cartL.find(item=> !item.checked)但是没有数据时返回undefine,!undefine变为true
-        this.cartL.find(item => item.checked === false) ===undefined
-      );
+        //this.cartL.find(item => item.checked === false) ===undefined
+        };
     },
     checkLength() {
       return this.cartL.filter(item => item.checked).length;

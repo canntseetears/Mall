@@ -14,3 +14,4 @@ See [Configuration Reference](https://cli.vuejs.org/config/).
 + use vux mapGetters.. must mount in index.js of vuex
 + when use better-scroll if content boom should give its width 100vh
 + maybe need refresh when using scroll
++ want to know situation outside should use promise

@@ -6,4 +6,5 @@ export default {
   cartL(state){
     return state.cartList
   }
+  //使用mapGettesr映射
 }
