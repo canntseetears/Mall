@@ -17,3 +17,4 @@ See [Configuration Reference](https://cli.vuejs.org/config/).
 + want to know situation outside should use promise
 + polyfill 补丁
 + vue-lazyload图片懒加载插件
++ 子路由to的路径动态绑定要加'/dad/'+son

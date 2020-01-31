@@ -1,6 +1,5 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
-
 Vue.use(VueRouter)
 
 const routes = [
@@ -19,7 +18,42 @@ const routes = [
       {
         path:'sweater',
         name:'sweater',
-        component:import('@/views/menu/child/Mcontentmain')
+        component:()=>import('@/views/menu/child/Msweater')
+      },
+      {
+        path: 'shirt',
+        name:'shirt',
+        component:()=>import('@/views/menu/child/Mshirt')
+      },
+      {
+        path: 'Tshirt',
+        name:'Tshirt',
+        component:()=>import('@/views/menu/child/MTshirt')
+      },
+      {
+        path: 'coat',
+        name:'coat',
+        component:()=>import('@/views/menu/child/Mcoat')
+      },
+      {
+        path: 'pants',
+        name:'pants',
+        component:()=>import('@/views/menu/child/Mpants')
+      },
+      {
+        path: 'longs',
+        name:'longs',
+        component:()=>import('@/views/menu/child/Mlongs')
+      },
+      {
+        path: 'kilt',
+        name:'kilt',
+        component:()=>import('@/views/menu/child/Mkilt')
+      },
+      {
+        path: 'longuette',
+        name:'longuette',
+        component:()=>import('@/views/menu/child/Mlonguette')
       }
     ]
   },

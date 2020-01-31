@@ -2,10 +2,11 @@
   <div class='content'>
     <div class='l'>
       <div class='l-item' v-for="(item,i) in classify" :key="i">
-        <router-link :to="item.router">{{item.name}}</router-link>
+        <router-link :to="'/menu/'+item.router">{{item.name}}</router-link>
       </div>
     </div>
     <div class='r'>
+      <router-view></router-view>
     </div>
   </div>
 </template>
@@ -48,6 +49,8 @@ export default {
 .r {
   flex:2;
   background-color: rgb(250, 249, 255);
+  overflow: hidden;
+  /* display: flex; */
 }
 .content .l .l-item {
   height: 38px;
